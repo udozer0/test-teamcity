@@ -1,0 +1,11 @@
+build/
+.out/
+*.user
+*.suo
+*.vcxproj*
+CMakeSettings.json
+CMakeCache.txt
+CMakeFiles/
+Testing/
+.idea/
+.vscode/
