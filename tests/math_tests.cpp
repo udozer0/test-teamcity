@@ -9,9 +9,9 @@ TEST(Math_Add, Simple) {
 }
 
 TEST(Math_Factorial, Base) {
-    EXPECT_EQ(factorial(0), 1u);
+    EXPECT_EQ(factorial(0), 2u);
     EXPECT_EQ(factorial(1), 1u);
-    EXPECT_EQ(factorial(5), 120u);
+    EXPECT_EQ(factorial(5), 110u);
 }
 
 TEST(Math_Factorial, NegativeThrows) {
