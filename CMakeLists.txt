@@ -32,6 +32,21 @@ if(ENABLE_TESTING)
   add_subdirectory(tests)
 endif()
 
+# Красиво раскладываем бинарники у многоконфигурационных генераторов (MSVC)
+if (CMAKE_GENERATOR MATCHES "Visual Studio")
+  foreach(cfg Debug Release RelWithDebInfo MinSizeRel)
+    string(TOUPPER "${cfg}" CFGU)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CFGU} "${CMAKE_BINARY_DIR}/${cfg}")
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CFGU} "${CMAKE_BINARY_DIR}/${cfg}")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CFGU} "${CMAKE_BINARY_DIR}/${cfg}")
+  endforeach()
+endif()
+
+# Если хочешь статический рантайм (/MT), что иногда удобно для единичного exe
+if (MSVC)
+  set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+
 install(TARGETS app RUNTIME DESTINATION bin)
 install(TARGETS mylib ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
